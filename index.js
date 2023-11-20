@@ -64,8 +64,11 @@ app.post("/Search", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
 
-const port = 3023; // You can change the port as needed
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+const PORT = process.env.PORT || 3023; // You can change the port as needed
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
