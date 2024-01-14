@@ -37,17 +37,26 @@ app.post("/Search", async (req, res) => {
 
       const result = await Product.aggregate([
         {
-          $vectorSearch: {
-            queryVector: embedding,
-            path: "name_embedding",
-            path: "description_embedding",
-            numCandidates: 100,
-            index: "gb",
-            limit: 100,
+          $search: {
+            index: "product1", // Name of Vector Search Index
+            knnBeta: {
+              vector: embedding,
+              path: "nameEmbedding", // Name of the 'embedding' field
+              k: 5,
+            },
           },
         },
-        { $skip: skip },
-        { $limit: limit || 5 },
+        {
+          $project: {
+            nameEmbedding: 0, // Exclude the 'nameEmbedding' field
+          },
+        },
+        {
+          $skip: skip,
+        },
+        {
+          $limit: limit,
+        },
       ]);
       console.log(result);
 

@@ -1,27 +1,5 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
-
-const reviewSchema = new mongoose.Schema({
-  rating: {
-    type: Number,
-    required: true,
-    min: 1,
-    max: 5,
-  },
-  text: {
-    type: String,
-    required: true,
-  },
-  userId: {
-    type: String,
-    // Reference to the User model if you have one
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
 const variantSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -47,6 +25,10 @@ const productSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
+    required: true,
+  },
+  basevariant: {
+    type: String,
     required: true,
   },
   discount: {
@@ -75,14 +57,12 @@ const productSchema = new mongoose.Schema({
   Description: {
     type: String,
   },
-  reviews: [reviewSchema],
   unit: {
     type: String,
   },
   variants: [variantSchema],
-  basevariant: {
-    type: String,
-    required: true,
+  nameEmbedding: {
+    type: [Number],
   },
 });
 
