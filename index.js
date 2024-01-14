@@ -59,6 +59,7 @@ app.post("/Search", async (req, res) => {
             price: 1,
             discount: 1,
             Description: 1,
+            imageUrl: 1,
           },
         },
         {
