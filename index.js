@@ -48,7 +48,17 @@ app.post("/Search", async (req, res) => {
         },
         {
           $project: {
-            nameEmbedding: 0, // Exclude the 'nameEmbedding' field
+            nameEmbedding: 0,
+            // Exclude the 'nameEmbedding' field
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            productName: 1,
+            price: 1,
+            discount: 1,
+            Description: 1,
           },
         },
         {
