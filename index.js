@@ -42,7 +42,7 @@ app.post("/Search", async (req, res) => {
             knnBeta: {
               vector: embedding,
               path: "nameEmbedding", // Name of the 'embedding' field
-              k: 5,
+              k: 150,
             },
           },
         },
